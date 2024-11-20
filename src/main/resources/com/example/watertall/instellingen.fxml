@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.AppBar?>
+<?import com.gluonhq.charm.glisten.control.BottomNavigation?>
+<?import com.gluonhq.charm.glisten.control.BottomNavigationButton?>
+<?import com.gluonhq.charm.glisten.control.CardPane?>
+<?import com.gluonhq.charm.glisten.control.Icon?>
+<?import com.gluonhq.charm.glisten.mvc.View?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Circle?>
+
+<View maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="369.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+    <bottom>
+        <BottomNavigation BorderPane.alignment="CENTER">
+            <actionItems>
+                <BottomNavigationButton text="home">
+                    <graphic>
+                        <Icon content="HOME" />
+                    </graphic>
+                </BottomNavigationButton>
+                <BottomNavigationButton prefHeight="64.0" prefWidth="164.0" text="sensoren ">
+                    <graphic>
+                        <Icon content="FAVORITE" />
+                    </graphic>
+                </BottomNavigationButton>
+                <BottomNavigationButton layoutX="233.0" layoutY="10.0" text="profiel">
+                    <graphic>
+                        <Icon content="PERM_IDENTITY" />
+                    </graphic>
+                </BottomNavigationButton>
+                <BottomNavigationButton minWidth="27.0" prefHeight="64.0" prefWidth="27.0" selected="true" text="instellingen">
+                    <graphic>
+                        <Icon content="NEAR_ME" />
+                    </graphic>
+                </BottomNavigationButton>
+            </actionItems>
+        </BottomNavigation>
+    </bottom>
+    <top>
+        <AppBar titleText="Instellingen" BorderPane.alignment="CENTER" />
+    </top>
+    <center>
+        <CardPane BorderPane.alignment="CENTER">
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" style="-fx-padding:10;" text="Taal                                                                     ">
+                <graphic>
+                    <Label text="Nederlands" />
+                </graphic>
+            </Label>
+            <Label alignment="BASELINE_RIGHT" contentDisplay="RIGHT" style="-fx-padding:10;" text="Thema                                                                              ">
+                <graphic>
+                    <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Wit" />
+                </graphic>
+            </Label>
+            <Label contentDisplay="RIGHT" style="-fx-padding:10;" text="Meldingsvoorkeuren                                   ">
+                <graphic>
+                    <Label text="Alle meldingen" />
+                </graphic>
+            </Label>
+            <Label contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" style="-fx-padding:10;" text="Systeemstatus                                ">
+                <graphic>
+                    <Label text="Geen complicaties">
+                        <graphic>
+                            <Circle fill="#29a419" radius="9.0" stroke="BLACK" strokeType="INSIDE" />
+                        </graphic>
+                    </Label>
+                </graphic>
+            </Label>
+            <Label contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" style="-fx-padding:10;" text="Software updates                                         ">
+                <graphic>
+                    <Label contentDisplay="RIGHT" text="Geen updates" />
+                </graphic>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" style="-fx-padding:10;" text="Gegevensbeheer" />
+            <Label layoutX="10.0" layoutY="10.0" style="-fx-padding:10;" text="Privacybeleid" />
+            <Label style="-fx-padding:10;" text="FAQ-sectie" />
+            <Label layoutX="10.0" layoutY="10.0" style="-fx-padding:10;" text="Contact Ondersteuning" />
+        </CardPane>
+    </center>
+</View>
