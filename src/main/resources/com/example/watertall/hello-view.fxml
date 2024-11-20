@@ -1,16 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.gluonhq.charm.glisten.control.AppBar?>
+<?import com.gluonhq.charm.glisten.control.BottomNavigation?>
+<?import com.gluonhq.charm.glisten.control.BottomNavigationButton?>
+<?import com.gluonhq.charm.glisten.control.Icon?>
+<?import com.gluonhq.charm.glisten.control.ProgressBar?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.watertall.HelloController">
-  <padding>
-    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-  </padding>
-
-  <Label fx:id="welcomeText"/>
-  <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="457.0" prefWidth="469.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <BottomNavigation layoutX="2.0" layoutY="372.0" prefHeight="85.0" prefWidth="467.0">
+      <actionItems>
+        <BottomNavigationButton selected="true" text="Home">
+          <graphic>
+            <Icon content="RECENT_ACTORS" />
+          </graphic>
+        </BottomNavigationButton>
+        <BottomNavigationButton minWidth="0.0" prefHeight="65.0" prefWidth="0.0" text="Instellingen">
+          <graphic>
+            <Icon content="NEAR_ME" />
+          </graphic>
+        </BottomNavigationButton>
+        <BottomNavigationButton selected="true" text="Profiel">
+          <graphic>
+            <Icon content="RECENT_ACTORS" />
+          </graphic>
+        </BottomNavigationButton>
+        <BottomNavigationButton text="Senoren">
+          <graphic>
+            <Icon content="FAVORITE" />
+          </graphic>
+        </BottomNavigationButton>
+      </actionItems>
+    </BottomNavigation>
+    <AppBar layoutX="-5.0" prefHeight="53.0" prefWidth="474.0" titleText="AppBar" />
+    <Icon content="INVERT_COLORS" layoutX="289.0" layoutY="82.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="45.0">
+      <opaqueInsets>
+        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+      </opaqueInsets>
+      <cursor>
+        <Cursor fx:constant="W_RESIZE" />
+      </cursor>
+    </Icon>
+    <Text layoutX="91.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="36%" />
+    <ProgressBar layoutX="14.0" layoutY="119.0" prefHeight="18.0" prefWidth="135.0" progress="0.0" />
+    <Text layoutX="33.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vochtheid meter" />
+    <Text layoutX="41.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="genoeg water" />
+    <Text layoutX="33.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="temperature" />
+    <Text layoutX="70.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="16c" />
+    <Icon content="WB_CLOUDY" layoutX="36.0" layoutY="260.0" />
+    <ProgressBar layoutX="81.0" layoutY="265.0" prefHeight="16.0" prefWidth="81.0" progress="0.0" rotate="-90.0" />
+    <Text layoutX="296.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="luchtvochtigheid" />
+    <Text layoutX="334.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="78%" />
+    <Icon content="LOCAL_DRINK" layoutX="47.0" layoutY="86.0" />
+    <Text layoutX="296.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="uv-index" />
+    <LineChart layoutX="211.0" layoutY="198.0" prefHeight="111.0" prefWidth="180.0">
+      <xAxis>
+        <CategoryAxis side="BOTTOM" />
+      </xAxis>
+      <yAxis>
+        <NumberAxis side="TOP" />
+      </yAxis>
+    </LineChart>
+    <Icon content="BRIGHTNESS_5" layoutX="261.0" layoutY="151.0" />
+  </children>
+</Pane>
