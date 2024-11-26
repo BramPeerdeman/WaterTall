@@ -18,6 +18,7 @@
             <AnchorPane prefHeight="65.0" prefWidth="200.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
                <children>
                   <Pane layoutX="68.0" layoutY="20.0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #808000;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <Label fx:id="locationLabel" layoutX="50" layoutY="200" text="Location: " />
                      <children>
                         <ImageView fx:id="Exit" fitHeight="22.0" fitWidth="22.0" layoutX="678.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -59,6 +60,17 @@
                   <VBox layoutX="111.0" layoutY="95.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
                      <children>
                         <JFXButton alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="335.0" text="Home" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/dash.png" />
+                                 </image></ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton alignment="BASELINE_LEFT" prefHeight="50.0" text="Get Location" onAction="#getLocation" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
