@@ -11,6 +11,9 @@ module com.example.watertall {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.desktop;
+    requires java.sql;
+    requires io.github.cdimascio.dotenv.java;
+    requires mysql.connector.j;
 
     opens com.example.watertall to javafx.fxml;
     exports com.example.watertall;
