@@ -14,6 +14,7 @@ module com.example.watertall {
     requires java.sql;
     requires io.github.cdimascio.dotenv.java;
     requires mysql.connector.j;
+    requires org.json;
 
     opens com.example.watertall to javafx.fxml;
     exports com.example.watertall;
