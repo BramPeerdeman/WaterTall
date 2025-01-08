@@ -22,6 +22,12 @@
   </repositories>
 
   <dependencies>
+
+    <dependency>
+      <groupId>com.fazecast</groupId>
+      <artifactId>jSerialComm</artifactId>
+      <version>2.9.3</version>
+      </dependency>
     <!-- JavaFX Dependencies -->
     <dependency>
       <groupId>com.fazecast</groupId>
@@ -135,6 +141,12 @@
           <artifactId>*</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mindrot</groupId>
+      <artifactId>jbcrypt</artifactId>
+      <version>0.4</version>
     </dependency>
 
     <!-- JUnit for Testing -->

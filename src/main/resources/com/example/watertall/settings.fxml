@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watertall.Controller">
+
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -74,6 +83,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
+                        <JFXButton alignment="BASELINE_LEFT" onAction="#getLocation" prefHeight="50.0" text="Get Location" textFill="WHITE">
                         <JFXButton alignment="BASELINE_LEFT" onAction="#getLocation" prefHeight="50.0" styleClass="sidebarItem" text="Get Location" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
