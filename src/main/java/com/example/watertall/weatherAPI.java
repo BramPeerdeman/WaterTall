@@ -10,17 +10,17 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import com.mysql.cj.xdevapi.JsonArray;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class weatherAPI {
 
-    private static final String apiUrl = "https://api.open-meteo.com/v1/forecast?latitude=52.374&longitude=4.8897&hourly=temperature_80m,soil_moisture_0_to_1cm&forecast_days=1";
+    private static final String apiUrl = "https://api.open-meteo.com/v1/forecast?latitude=52.0767&longitude=4.2986&hourly=temperature_2m,relative_humidity_2m&daily=precipitation_sum&forecast_days=3";
 
+    //dit zorgt ervoor dat de weerAPI elk uur wordt geactiveerd
     public static void main(String[] args) {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(weatherAPI::weerUpdate, 0, 1, TimeUnit.HOURS);
+        scheduler.scheduleAtFixedRate(weatherAPI::weerUpdate, 0, 1, TimeUnit.HOURS); //Vegeet niet weer naar HOURS te veranderen
     }
 
     public static void weerUpdate () {
@@ -42,20 +42,36 @@ public class weatherAPI {
                 }
                 in.close();
 
-                // Parse JSON response
+                // Parsed JSON response
                 JSONObject jsonResponse = new JSONObject(response.toString());
-                JSONArray times = jsonResponse.getJSONObject("hourly").getJSONArray("time");
-                JSONArray temperatures = jsonResponse.getJSONObject("hourly").getJSONArray("temperature_80m");
+                JSONArray timesHour = jsonResponse.getJSONObject("hourly").getJSONArray("time");
+                JSONArray timesDay = jsonResponse.getJSONObject("daily").getJSONArray("time");
+                JSONArray temperatures = jsonResponse.getJSONObject("hourly").getJSONArray("temperature_2m");
+                JSONArray humidity = jsonResponse.getJSONObject("hourly").getJSONArray("relative_humidity_2m");
+                JSONArray precipitation = jsonResponse.getJSONObject("daily").getJSONArray("precipitation_sum");
 
-                // Get current hour
+                // Krijgt de huidige tijd
                 LocalDateTime now = LocalDateTime.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:00");
-                String currentHour = now.format(formatter);
+                DateTimeFormatter formatterHour = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:00");
+                DateTimeFormatter formatterDay = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String currentHour = now.format(formatterHour);
+                String currentDay = now.format(formatterDay);
 
-                // Find the temperature for the current hour
-                for (int i = 0; i < times.length(); i++) {
-                    if (times.getString(i).equals(currentHour)) {
+                System.out.println(currentHour);
+                System.out.println(currentDay);
+
+                // Vindt de temperatuur en relatieve luchtvochtigheid van de huidige uur
+                for (int i = 0; i < timesHour.length(); i++) {
+                    if (timesHour.getString(i).equals(currentHour)) {
                         new Temperature(temperatures.getDouble(i));
+                        new Humidity(humidity.getInt(i));
+                        break;
+                    }
+                }
+                // Vindt de totale verwachte neerslag van de huidige dag
+                for (int i = 0; i < timesDay.length(); i++) {
+                    if (timesDay.getString(i).equals(currentDay)) {
+                        new Precipitation(precipitation.getDouble(i));
                         break;
                     }
                 }
@@ -73,11 +89,40 @@ class Temperature {
 
     public Temperature (double temperature) {
         this.temperature = temperature;
+        System.out.println(temperature + "°C");
     }
 
     public double getTemperature() {
         return temperature;
     }
 
+}
+
+class Humidity {
+    private final int humidity;
+
+    public Humidity(int humidity) {
+        this.humidity = humidity;
+        System.out.println(humidity + "%");
+    }
+
+    public int getHumidity() {
+        return humidity;
+    }
 
 }
+
+class Precipitation {
+    private final double precipitation;
+
+    public Precipitation(double precipitation) {
+        this.precipitation = precipitation;
+        System.out.println(precipitation + "mm");
+    }
+
+    public double getPrecipitation() {
+        return precipitation;
+    }
+
+}
+

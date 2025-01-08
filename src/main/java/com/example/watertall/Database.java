@@ -35,9 +35,9 @@ public class Database
             new Plant(1,
                     plantRs.getString("naam_plant"),
                     plantRs.getString("planttype"),
-                    plantRs.getDouble("min_water"),
+                    plantRs.getDouble("min_water"), //water is in bodemvochtigheids%
                     plantRs.getDouble("max_water"),
-                    plantRs.getDouble("min_temperatuur"),
+                    plantRs.getDouble("min_temperatuur"), // in celcius
                     plantRs.getDouble("max_temperatuur"));
         } catch (SQLException e) {
             e.printStackTrace();
