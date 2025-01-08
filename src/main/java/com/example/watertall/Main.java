@@ -1,21 +1,22 @@
 package com.example.watertall;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.util.Objects;
-
 public class Main extends Application {
-    double x,y = 0;
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        System.out.println(getClass().getResource("settings.fxml"));
 
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
+    private double x, y = 0;
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        AnchorPane root = FXMLLoader.load(getClass().getResource("settings.fxml"));
 
         primaryStage.initStyle(StageStyle.UNDECORATED);
 

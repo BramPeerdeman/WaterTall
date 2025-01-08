@@ -12,6 +12,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.io.IOException;
+import javafx.stage.Stage;
+import javafx.scene.Node;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.Scene;
@@ -30,6 +33,9 @@ public class Controller implements Initializable
     @FXML
     private ImageView Exit;
 
+//    @FXML
+//    private ImageView Maximize;
+
     @FXML
     private Label Menu;
 
@@ -42,9 +48,16 @@ public class Controller implements Initializable
     @FXML
     private Label locationLabel;
 
+    @FXML
+    private Label temperatureLabel;
+
+    @FXML
+    private Label moistureLabel;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        setupSerialCommunication();
 
         Exit.setOnMouseClicked(event ->
         {
@@ -87,14 +100,36 @@ public class Controller implements Initializable
                 MenuClose.setVisible(false);
             });
         });
+
+//        Maximize.setOnMouseClicked(event ->
+//        {
+//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//            stage.setMaximized(!stage.isMaximized());
+//        });
     }
+
+    private void setupSerialCommunication() {
+        SerialController serialController = new SerialController("COM5", 115200);
+
+        serialController.setDataListener(data -> {
+            String line = data.trim();
+            if (line.startsWith("T:")) {
+                temperatureLabel.setText("Temperature: " + line.substring(2) + "°C");
+            } else if (line.startsWith("M:")) {
+                moistureLabel.setText("Moisture: " + line.substring(2));
+            }
+        });
+
+        serialController.start();
+    }
+
     public void getLocation()
     {
         new Thread(() ->
         {
             try
             {
-                URL url = new URL("http://ip-api.com/json/");
+                URL url = new URL("https://ip-api.com/json/");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
 
