@@ -2,36 +2,36 @@ package com.example.watertall;
 
 import com.fazecast.jSerialComm.SerialPort;
 import javafx.application.Platform;
-
 import java.io.InputStream;
-import java.util.Scanner;
 
 public class SerialController {
 
     private SerialPort microbitPort;
     private DataListener listener;
 
-    public SerialController(String portName, int baudRate)
-    {
+    public SerialController(String portName, int baudRate) {
+        // Haal de gewenste poort op
         microbitPort = SerialPort.getCommPort(portName);
+
+        // Stel de baudrate in
         microbitPort.setBaudRate(baudRate);
+
+        // Extra logging om te zien welke poort we proberen te openen
+        System.out.println("Attempting to open port: " + portName);
     }
 
-    public void setDataListener(DataListener listener)
-    {
+    public void setDataListener(DataListener listener) {
         this.listener = listener;
     }
 
-    public void start()
-    {
-        if (microbitPort.openPort())
-        {
-            System.out.println("Port opened successfully.");
+    public void start() {
+        // Controleer of de poort kan worden geopend
+        if (microbitPort.openPort()) {
+            System.out.println("Port opened successfully: " + microbitPort.getSystemPortName());
             new Thread(this::readData).start();
-        }
-        else
-        {
-            System.err.println("Failed to open port.");
+        } else {
+            System.err.println("Failed to open port: " + microbitPort.getSystemPortName());
+            System.err.println("Error code: " + microbitPort.getLastErrorCode());
         }
     }
 
@@ -61,6 +61,7 @@ public class SerialController {
                     }
                 }
 
+                // Voeg een kleine vertraging toe zodat we niet teveel resources gebruiken
                 Thread.sleep(10);
             }
         } catch (Exception e) {
@@ -68,11 +69,7 @@ public class SerialController {
         }
     }
 
-
-
-
-    public interface DataListener
-    {
+    public interface DataListener {
         void onDataReceived(String data);
     }
 }
