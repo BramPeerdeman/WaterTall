@@ -8,21 +8,6 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watertall.Controller">
-
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane prefHeight="400.0" prefWidth="700.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watertall.Controller">
    <children>
       <BorderPane layoutX="68.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -37,7 +22,6 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <!-- Menu Label with fx:id -->
                   <Label fx:id="Menu" layoutX="14.0" layoutY="34.0" text="MENU" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
@@ -50,7 +34,6 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <!-- MenuClose Label with fx:id -->
                   <Label fx:id="MenuClose" layoutX="14.0" layoutY="34.0" text="MENU" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
@@ -83,7 +66,6 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton alignment="BASELINE_LEFT" onAction="#getLocation" prefHeight="50.0" text="Get Location" textFill="WHITE">
                         <JFXButton alignment="BASELINE_LEFT" onAction="#getLocation" prefHeight="50.0" styleClass="sidebarItem" text="Get Location" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
@@ -126,7 +108,6 @@
             </AnchorPane>
          </left>
          <center>
-            <!-- GridPane for 2x2 blocks with responsive layout -->
             <GridPane alignment="CENTER" hgap="20.0" vgap="20.0" BorderPane.alignment="CENTER">
                <columnConstraints>
                   <ColumnConstraints hgrow="ALWAYS" />
@@ -136,32 +117,14 @@
                   <RowConstraints vgrow="ALWAYS" />
                   <RowConstraints vgrow="ALWAYS" />
                </rowConstraints>
-
-                           <!-- Block 1 -->
                <AnchorPane minHeight="100.0" minWidth="150.0" style="-fx-background-color: #C0C0C0;" GridPane.columnIndex="0" GridPane.rowIndex="0">
                   <children>
                      <Label fx:id="temperatureLabel" alignment="CENTER" />
                   </children>
                </AnchorPane>
-
-                           <!-- Block 2 -->
                <AnchorPane minHeight="100.0" minWidth="150.0" style="-fx-background-color: #C0C0C0;" GridPane.columnIndex="1" GridPane.rowIndex="0">
                   <children>
                      <Label fx:id="moistureLabel" alignment="CENTER" />
-                  </children>
-               </AnchorPane>
-
-                           <!-- Block 3 -->
-               <AnchorPane minHeight="100.0" minWidth="150.0" style="-fx-background-color: #C0C0C0;" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                  <children>
-                     <Label alignment="CENTER" text="Info 3" />
-                  </children>
-               </AnchorPane>
-
-                           <!-- Block 4 -->
-               <AnchorPane minHeight="100.0" minWidth="150.0" style="-fx-background-color: #C0C0C0;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                  <children>
-                     <Label alignment="CENTER" text="Info 4" />
                   </children>
                </AnchorPane>
             </GridPane>

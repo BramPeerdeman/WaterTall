@@ -68,9 +68,6 @@ public class SerialController {
         }
     }
 
-
-
-
     public interface DataListener
     {
         void onDataReceived(String data);

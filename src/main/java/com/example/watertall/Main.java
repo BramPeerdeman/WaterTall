@@ -3,16 +3,23 @@ package com.example.watertall;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.IOException;
+import java.util.Objects;
+
 public class Main extends Application {
 
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
     private double x, y = 0;
+
+    public Main() throws IOException {
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
