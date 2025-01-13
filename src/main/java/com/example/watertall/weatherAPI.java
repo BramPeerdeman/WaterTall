@@ -6,6 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -20,7 +21,15 @@ public class weatherAPI {
     //dit zorgt ervoor dat de weerAPI elk uur wordt geactiveerd
     public static void main(String[] args) {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(weatherAPI::weerUpdate, 0, 1, TimeUnit.HOURS); //Vegeet niet weer naar HOURS te veranderen
+        // Calculate the delay until the next hour
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        calendar.add(Calendar.HOUR_OF_DAY, 1);
+        long initialDelay = calendar.getTimeInMillis() - System.currentTimeMillis();
+        long period = 60 * 30 * 1000;
+        scheduler.scheduleAtFixedRate(weatherAPI::weerUpdate, initialDelay, period, TimeUnit.MILLISECONDS); //Vegeet niet weer naar HOURS te veranderen
     }
 
     public static void weerUpdate () {
@@ -54,9 +63,12 @@ public class weatherAPI {
                 LocalDateTime now = LocalDateTime.now();
                 DateTimeFormatter formatterHour = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:00");
                 DateTimeFormatter formatterDay = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                DateTimeFormatter formatterNow = DateTimeFormatter.ofPattern("HH-mm-ss");
                 String currentHour = now.format(formatterHour);
                 String currentDay = now.format(formatterDay);
+                String currentTime = now.format(formatterNow);
 
+                System.out.println(currentTime);
                 System.out.println(currentHour);
                 System.out.println(currentDay);
 
