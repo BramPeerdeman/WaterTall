@@ -3,20 +3,25 @@ package com.example.watertall;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import java.io.IOException;
+import javafx.stage.Stage;
+import javafx.scene.Node;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
+import javafx.scene.Scene;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -27,6 +32,9 @@ public class Controller implements Initializable
 
     @FXML
     private ImageView Exit;
+
+//    @FXML
+//    private ImageView Maximize;
 
     @FXML
     private Label Menu;
@@ -40,9 +48,16 @@ public class Controller implements Initializable
     @FXML
     private Label locationLabel;
 
+    @FXML
+    private Label temperatureLabel;
+
+    @FXML
+    private Label moistureLabel;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        setupSerialCommunication();
 
         Exit.setOnMouseClicked(event ->
         {
@@ -85,14 +100,36 @@ public class Controller implements Initializable
                 MenuClose.setVisible(false);
             });
         });
+
+//        Maximize.setOnMouseClicked(event ->
+//        {
+//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//            stage.setMaximized(!stage.isMaximized());
+//        });
     }
+
+    private void setupSerialCommunication() {
+        SerialController serialController = new SerialController("COM5", 115200);
+
+        serialController.setDataListener(data -> {
+            String line = data.trim();
+            if (line.startsWith("T:")) {
+                temperatureLabel.setText("Temperature: " + line.substring(2) + "°C");
+            } else if (line.startsWith("M:")) {
+                moistureLabel.setText("Moisture: " + line.substring(2));
+            }
+        });
+
+        serialController.start();
+    }
+
     public void getLocation()
     {
         new Thread(() ->
         {
             try
             {
-                URL url = new URL("http://ip-api.com/json/");
+                URL url = new URL("https://ip-api.com/json/");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
 
@@ -150,5 +187,30 @@ public class Controller implements Initializable
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public void handleLoginClick(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Methode om de registratie pagina te openen
+    public void handleRegisterClick(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("registreren.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

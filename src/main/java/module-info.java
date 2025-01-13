@@ -15,6 +15,8 @@ module com.example.watertall {
     requires io.github.cdimascio.dotenv.java;
     requires mysql.connector.j;
     requires org.json;
+    requires jbcrypt;
+    requires com.fazecast.jSerialComm;
 
     opens com.example.watertall to javafx.fxml;
     exports com.example.watertall;

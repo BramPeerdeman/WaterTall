@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171"
+            fx:controller="com.example.watertall.RegisterController">
+    <children>
+        <VBox alignment="CENTER" spacing="15.0" AnchorPane.topAnchor="50.0" AnchorPane.leftAnchor="50.0"
+              AnchorPane.rightAnchor="50.0" AnchorPane.bottomAnchor="50.0">
+            <children>
+                <Label text="Registreren" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: black;" />
+                <TextField fx:id="usernameField" promptText="Gebruikersnaam" style="-fx-background-radius: 10; -fx-padding: 10;" />
+                <TextField fx:id="emailField" promptText="E-mailadres" style="-fx-background-radius: 10; -fx-padding: 10;" />
+                <PasswordField fx:id="passwordField" promptText="Wachtwoord" style="-fx-background-radius: 10; -fx-padding: 10;" />
+                <PasswordField fx:id="confirmPasswordField" promptText="Bevestig wachtwoord" style="-fx-background-radius: 10; -fx-padding: 10;" />
+                <Button text="Registreren" fx:id="registerButton" onAction="#handleRegister"
+                        style="-fx-background-color: #808000; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 10;" />
+                <Label fx:id="errorLabel" textFill="red" text="" visible="false" style="-fx-font-size: 12px;" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
