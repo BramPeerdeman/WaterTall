@@ -12,20 +12,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.io.IOException;
-import javafx.stage.Stage;
+
 import javafx.scene.Node;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.Scene;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class Controller implements Initializable
 {
@@ -107,6 +105,37 @@ public class Controller implements Initializable
 //            stage.setMaximized(!stage.isMaximized());
 //        });
     }
+
+    public void homeRedirect(ActionEvent event) throws IOException
+    {
+            Parent registerPage = FXMLLoader.load(getClass().getResource("homepage.fxml"));
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            stage.setScene(new Scene(registerPage, 700, 400));
+            stage.show();
+    }
+
+    public void profielRedirect(ActionEvent event) throws IOException
+    {
+        Parent registerPage = FXMLLoader.load(getClass().getResource("profiel.fxml"));
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        stage.setScene(new Scene(registerPage, 700, 400));
+        stage.show();
+    }
+
+    public void settingRedirect(ActionEvent event) throws IOException
+    {
+        Parent registerPage = FXMLLoader.load(getClass().getResource("homepage.fxml"));
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        stage.setScene(new Scene(registerPage, 700, 400));
+        stage.show();
+    }
+
 
     private void setupSerialCommunication() {
         SerialController serialController = new SerialController("COM5", 115200);
