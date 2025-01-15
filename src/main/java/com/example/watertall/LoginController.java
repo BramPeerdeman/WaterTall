@@ -36,7 +36,7 @@ public class LoginController {
             System.out.println("Login succesvol!");
             errorLabel.setText(""); // Wis foutmeldingen bij een succesvolle login
 
-            // Laad de nieuwe pagina (settings.fxml)
+            // Laad de nieuwe pagina (homepage.fxml)
             try {
                 redirectToSettings(event);
             } catch (IOException e) {
@@ -49,8 +49,8 @@ public class LoginController {
     }
 
     private void redirectToSettings(ActionEvent event) throws IOException {
-        // Laad de settings.fxml
-        Parent settingsPage = FXMLLoader.load(getClass().getResource("settings.fxml"));
+        // Laad de homepage.fxml
+        Parent settingsPage = FXMLLoader.load(getClass().getResource("homepage.fxml"));
 
         // Haal het huidige venster (Stage) op
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
