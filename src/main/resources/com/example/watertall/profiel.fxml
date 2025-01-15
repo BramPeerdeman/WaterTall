@@ -159,6 +159,12 @@
                                         <Label fx:id="minTempLabel" text="-" />
                                         <Label text="Max Temperatuur:" />
                                         <Label fx:id="maxTempLabel" text="-" />
+
+                                        <Label text="Pomp Snelheid:" />
+                                        <Label fx:id="maxSpeedLabel" text="-" />
+
+                                        <Label text="Vochtigheid waarde:" />
+                                        <Label fx:id="minMoistLabel" text="-" />
                                     </children>
                                 </VBox>
                             </children>

@@ -63,6 +63,12 @@ public class ProfielenController
     private Label maxTempLabel;
 
     @FXML
+    private Label maxSpeedLabel;
+
+    @FXML
+    private Label minMoistLabel;
+
+    @FXML
     public void initialize() {
         loadPlantTypes();
 
@@ -117,7 +123,7 @@ public class ProfielenController
     }
 
     private void loadPlantDetails(String plantName) {
-        String query = "SELECT naam_plant, planttype, min_water, max_water, min_optimumtemperatuur, max_optimumtemperatuur " +
+        String query = "SELECT naam_plant, planttype, min_water, max_water, min_optimumtemperatuur, max_optimumtemperatuur, max_speed, min_moisture " +
                 "FROM watertall.profiel_plant WHERE naam_plant = ?";
 
         try (Connection connection = database.getConnection();
@@ -133,6 +139,8 @@ public class ProfielenController
                     String maxWater = resultSet.getString("max_water");
                     String minTemp = resultSet.getString("min_optimumtemperatuur");
                     String maxTemp = resultSet.getString("max_optimumtemperatuur");
+                    Integer maxSpeed = resultSet.getInt("max_speed");
+                    Integer minMoisture = resultSet.getInt("min_moisture");
 
                     // Update the labels with the fetched data
                     naamPlantLabel.setText(naamPlant);
@@ -141,6 +149,8 @@ public class ProfielenController
                     maxWaterLabel.setText(maxWater);
                     minTempLabel.setText(minTemp);
                     maxTempLabel.setText(maxTemp);
+                    maxSpeedLabel.setText(String.valueOf(maxSpeed));
+                    minMoistLabel.setText(String.valueOf(minMoisture));
                 }
             }
 
