@@ -20,6 +20,7 @@ public class weatherAPI {
 
     //dit zorgt ervoor dat de weerAPI elk uur wordt geactiveerd
     public static void main(String[] args) {
+        weerUpdate();
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         // Calculate the delay until the next hour
         Calendar calendar = Calendar.getInstance();
