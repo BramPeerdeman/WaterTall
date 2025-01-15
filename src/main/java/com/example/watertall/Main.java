@@ -17,13 +17,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Laad de login.fxml als de startpagina
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
 
-        // Zorg ervoor dat het venster niet standaard decoraties heeft
+        Parent root = FXMLLoader.load(getClass().getResource("homepage.fxml"));
+
         primaryStage.initStyle(StageStyle.UNDECORATED);
 
-        // Maak het venster verplaatsbaar door het vast te pakken
         root.setOnMousePressed(event -> {
             x = event.getSceneX();
             y = event.getSceneY();
