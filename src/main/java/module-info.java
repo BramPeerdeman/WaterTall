@@ -14,6 +14,7 @@ module com.example.watertall {
     requires java.sql;
     requires io.github.cdimascio.dotenv.java;
     requires mysql.connector.j;
+    requires org.json;
     requires jbcrypt;
     requires com.fazecast.jSerialComm;
 
