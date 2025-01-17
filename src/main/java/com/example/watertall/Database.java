@@ -6,6 +6,8 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 public class Database
 {
+    private Plant plant;
+
     public Connection databaseLink;
     Dotenv dotenv = Dotenv.configure().load();
 
@@ -30,20 +32,23 @@ public class Database
 
     public void setPlantData (Integer id) {
         try (Statement stmt = databaseLink.createStatement()) {
-            ResultSet plantRs = stmt.executeQuery("SELECT naam_plant, planttype, min_water, max_water, min_temperatuur, max_temperatuur FROM plant WHERE plant_id = 1");
+            ResultSet plantRs = stmt.executeQuery("SELECT naam_plant, planttype, min_water, max_water, min_optimumtemperatuur, max_optimumtemperatuur FROM profiel_plant WHERE plant_id = 1");
             plantRs.next();
-            new Plant(1,
+            this.plant = new Plant(1,
                     plantRs.getString("naam_plant"),
                     plantRs.getString("planttype"),
                     plantRs.getDouble("min_water"), //water is in bodemvochtigheids%
                     plantRs.getDouble("max_water"),
-                    plantRs.getDouble("min_temperatuur"), // in celcius
-                    plantRs.getDouble("max_temperatuur"));
+                    plantRs.getDouble("min_optimumtemperatuur"), // in celcius
+                    plantRs.getDouble("max_optimumtemperatuur"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    public Plant getPlant() {
+        return plant;
+    }
 }
 
 class Plant {
