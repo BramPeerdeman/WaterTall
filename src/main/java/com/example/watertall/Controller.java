@@ -55,7 +55,6 @@ public class Controller implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        setupSerialCommunication();
 
         Exit.setOnMouseClicked(event ->
         {
@@ -134,88 +133,6 @@ public class Controller implements Initializable
 
         stage.setScene(new Scene(registerPage, 700, 400));
         stage.show();
-    }
-
-
-    private void setupSerialCommunication() {
-        SerialController serialController = new SerialController("COM5", 115200);
-
-        serialController.setDataListener(data -> {
-            String line = data.trim();
-            if (line.startsWith("T:")) {
-                temperatureLabel.setText("Temperature: " + line.substring(2) + "°C");
-            } else if (line.startsWith("M:")) {
-                moistureLabel.setText("Moisture: " + line.substring(2));
-            }
-        });
-
-        serialController.start();
-    }
-
-    public void getLocation()
-    {
-        new Thread(() ->
-        {
-            try
-            {
-                URL url = new URL("https://ip-api.com/json/");
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String inputLine;
-
-                while ((inputLine = in.readLine()) != null)
-                {
-                    response.append(inputLine);
-                }
-                in.close();
-
-                String jsonResponse = response.toString();
-                String location = parseLocation(jsonResponse);
-
-                Platform.runLater(() ->
-                {
-                    if (location != null)
-                    {
-                        locationLabel.setText("Location: " + location);
-                    } else
-                    {
-                        showError("Unable to determine location.");
-                    }
-                });
-            } catch (Exception e)
-            {
-                Platform.runLater(() -> showError("An error occurred while fetching location."));
-            }
-        }).start();
-    }
-
-    private String parseLocation(String json)
-    {
-        try
-        {
-            if (json.contains("\"city\":\"") && json.contains("\"regionName\":\""))
-            {
-                String city = json.split("\"city\":\"")[1].split("\"")[0];
-                String region = json.split("\"regionName\":\"")[1].split("\"")[0];
-                return city + ", " + region;
-            }
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private void showError(String message)
-    {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     public void handleLoginClick(ActionEvent event) {
