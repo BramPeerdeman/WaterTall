@@ -54,8 +54,8 @@ public class SproeiAlgorithme {
         database.getConnection();
         database.setPlantData(1);
         SproeiAlgorithme sproeiAlgorithme = new SproeiAlgorithme(weatherAPI, database);
-        double waterBenodigdheid = sproeiAlgorithme.waterBenodigdheid();
-        System.out.println(waterBenodigdheid + "% bodemvochtigheid");
+        double waterBenodigdheid = sproeiAlgorithme.waterBenodigdheid() * 10.23;
+        System.out.println(waterBenodigdheid + "bodemvochtigheid");
     }
 
     public static void main(String[] args) {
