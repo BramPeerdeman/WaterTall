@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watertall.Controller">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watertall.Controller">
    <children>
       <BorderPane layoutX="68.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -60,7 +63,7 @@
                <children>
                   <VBox layoutX="111.0" layoutY="95.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
                      <children>
-                        <JFXButton onAction="#homeRedirect" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="335.0" styleClass="sidebarItem" text="Home" textFill="WHITE">
+                        <JFXButton alignment="BASELINE_LEFT" onAction="#homeRedirect" prefHeight="50.0" prefWidth="335.0" styleClass="sidebarItem" text="Home" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -72,7 +75,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onAction="#profielRedirect" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="335.0" styleClass="sidebarItem" text="Profiles" textFill="WHITE">
+                        <JFXButton alignment="BASELINE_LEFT" onAction="#profielRedirect" prefHeight="50.0" prefWidth="335.0" styleClass="sidebarItem" text="Profiles" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -84,7 +87,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton onAction="#settingRedirect" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="335.0" styleClass="sidebarItem" text="Settings" textFill="WHITE">
+                        <JFXButton alignment="BASELINE_LEFT" onAction="#settingRedirect" prefHeight="50.0" prefWidth="335.0" styleClass="sidebarItem" text="Settings" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
@@ -102,7 +105,7 @@
             </AnchorPane>
          </left>
          <center>
-            <GridPane alignment="CENTER" hgap="20.0" vgap="20.0" BorderPane.alignment="CENTER">
+            <GridPane alignment="CENTER" gridLinesVisible="true" hgap="20.0" vgap="20.0" BorderPane.alignment="CENTER">
                <columnConstraints>
                   <ColumnConstraints hgrow="ALWAYS" />
                   <ColumnConstraints hgrow="ALWAYS" />
@@ -119,6 +122,19 @@
                <AnchorPane minHeight="100.0" minWidth="150.0" style="-fx-background-color: #C0C0C0;" GridPane.columnIndex="1" GridPane.rowIndex="0">
                   <children>
                      <Label fx:id="moistureLabel" alignment="CENTER" />
+                  </children>
+               </AnchorPane>
+               <AnchorPane minHeight="100.0" minWidth="139.0" prefHeight="114.0" prefWidth="139.0" style="-fx-background-color: #C0C0C0;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <children>
+                     <Label fx:id="temperatureLabel11" alignment="CENTER" />
+                     <BarChart layoutX="60.0" layoutY="60.0" prefHeight="194.0" prefWidth="295.0">
+                       <xAxis>
+                         <CategoryAxis side="BOTTOM" />
+                       </xAxis>
+                       <yAxis>
+                         <NumberAxis side="LEFT" />
+                       </yAxis>
+                     </BarChart>
                   </children>
                </AnchorPane>
             </GridPane>
