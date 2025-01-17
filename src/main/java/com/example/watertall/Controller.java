@@ -31,9 +31,6 @@ public class Controller implements Initializable
     @FXML
     private ImageView Exit;
 
-//    @FXML
-//    private ImageView Maximize;
-
     @FXML
     private Label Menu;
 
@@ -43,11 +40,14 @@ public class Controller implements Initializable
     @FXML
     private AnchorPane slider;
 
-    @FXML
-    private Label locationLabel;
+//    @FXML
+//    private Label locationLabel;
 
     @FXML
     private Label temperatureLabel;
+
+    @FXML
+    private ImageView weatherIcon;
 
     @FXML
     private Label moistureLabel;
@@ -60,6 +60,7 @@ public class Controller implements Initializable
         {
             System.exit(0);
         });
+
         slider.setTranslateX(-176);
 
         Menu.setOnMouseClicked(event ->
@@ -98,11 +99,7 @@ public class Controller implements Initializable
             });
         });
 
-//        Maximize.setOnMouseClicked(event ->
-//        {
-//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//            stage.setMaximized(!stage.isMaximized());
-//        });
+
     }
 
     public void homeRedirect(ActionEvent event) throws IOException
