@@ -19,7 +19,9 @@ public class weatherAPI {
     private Humidity humidity;
     private Precipitation precipitation;
 
-    private static final String apiUrl = "https://api.open-meteo.com/v1/forecast?latitude=52.0767&longitude=4.2986&hourly=temperature_2m,relative_humidity_2m&daily=precipitation_sum&forecast_days=3";
+    private static final String apiUrl = "https://api.open-meteo.com/v1/forecast?latitude=52.0767&longitude=4.2986&hourly=temperature_2m,relative_humidity_2m&daily=precipitation_sum";
+    private JSONArray dayArray;
+    private JSONArray precipitationArray;
 
     //dit zorgt ervoor dat de weerAPI elk uur wordt geactiveerd
     public static void main(String[] args) {
@@ -61,22 +63,27 @@ public class weatherAPI {
                 JSONObject jsonResponse = new JSONObject(response.toString());
                 JSONArray timesHour = jsonResponse.getJSONObject("hourly").getJSONArray("time");
                 JSONArray timesDay = jsonResponse.getJSONObject("daily").getJSONArray("time");
+                this.dayArray = new JSONArray(jsonResponse.getJSONObject("daily").getJSONArray("time"));
                 JSONArray temperatures = jsonResponse.getJSONObject("hourly").getJSONArray("temperature_2m");
                 JSONArray humidity = jsonResponse.getJSONObject("hourly").getJSONArray("relative_humidity_2m");
                 JSONArray precipitation = jsonResponse.getJSONObject("daily").getJSONArray("precipitation_sum");
+                this.precipitationArray = new JSONArray(jsonResponse.getJSONObject("daily").getJSONArray("precipitation_sum"));
 
                 // Krijgt de huidige tijd
                 LocalDateTime now = LocalDateTime.now();
                 DateTimeFormatter formatterHour = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:00");
                 DateTimeFormatter formatterDay = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 DateTimeFormatter formatterNow = DateTimeFormatter.ofPattern("HH-mm-ss");
+                DateTimeFormatter formatterDay2 = DateTimeFormatter.ofPattern("E, MMM dd");
                 String currentHour = now.format(formatterHour);
                 String currentDay = now.format(formatterDay);
                 String currentTime = now.format(formatterNow);
+                String currentDay2 = now.format(formatterDay2);
 
                 System.out.println(currentTime);
                 System.out.println(currentHour);
                 System.out.println(currentDay);
+                System.out.println(currentDay2);
 
                 // Vindt de temperatuur en relatieve luchtvochtigheid van de huidige uur
                 for (int i = 0; i < timesHour.length(); i++) {
@@ -114,6 +121,14 @@ public class weatherAPI {
 
     public Precipitation getPrecipitation() {
         return precipitation;
+    }
+
+    public JSONArray getDayArray() {
+        return dayArray;
+    }
+
+    public JSONArray getPrecipitationArray() {
+        return precipitationArray;
     }
 }
 
