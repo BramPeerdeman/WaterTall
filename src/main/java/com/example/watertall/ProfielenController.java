@@ -242,29 +242,31 @@ public class ProfielenController
         }
     }
 
-    public void switchToHome(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("home.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToScene(ActionEvent event, String fxmlFile) {
+        try {
+            root = FXMLLoader.load(getClass().getResource(fxmlFile));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Optionally, display an error message to the user
+        }
     }
 
-    public void switchToInstellingen(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("instellingen.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToHome(ActionEvent event) {
+        switchToScene(event, "homepage.fxml");
     }
 
-    public void switchToProfielen(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("profielen2.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToInstellingen(ActionEvent event) {
+        switchToScene(event, "instellingen.fxml");
     }
+
+    public void switchToProfielen(ActionEvent event) {
+        switchToScene(event, "profiel.fxml");
+    }
+
 
     // Method to load plant types into ComboBox
     @FXML

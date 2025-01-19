@@ -108,7 +108,7 @@ public class Controller implements Initializable
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            stage.setScene(new Scene(registerPage, 700, 400));
+            stage.setScene(new Scene(registerPage, 1000, 700));
             stage.show();
     }
 
@@ -118,7 +118,7 @@ public class Controller implements Initializable
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        stage.setScene(new Scene(registerPage, 700, 400));
+        stage.setScene(new Scene(registerPage, 1000, 700));
         stage.show();
     }
 
@@ -128,7 +128,7 @@ public class Controller implements Initializable
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        stage.setScene(new Scene(registerPage, 700, 400));
+        stage.setScene(new Scene(registerPage, 1000, 700));
         stage.show();
     }
 
