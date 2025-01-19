@@ -8,11 +8,12 @@ import java.util.concurrent.TimeUnit;
 public class SproeiAlgorithme {
     private weatherAPI weatherAPI;
     private Database database;
+    private Plant plant;
 
-    public SproeiAlgorithme (weatherAPI weatherAPI, Database database) {
+    public SproeiAlgorithme (weatherAPI weatherAPI, Database database, Plant plant) {
         this.weatherAPI = weatherAPI;
         this.database = database;
-
+        this.plant = plant;
     }
 
     public void test () {
@@ -20,13 +21,13 @@ public class SproeiAlgorithme {
         System.out.println(database.getPlant().getMaxOptimumTemp());
     }
 
-    public double waterBenodigdheid () {
+    public double waterBenodigdheid() {
         double waterBenodigdheid;
         double temperatuur = weatherAPI.getTemperature().getTemperature();
-        double minTemp = database.getPlant().getMinOptimumTemp();
-        double maxTemp = database.getPlant().getMaxOptimumTemp();
-        double minWater = database.getPlant().getMinWater();
-        double maxWater = database.getPlant().getMaxWater();
+        double minTemp = plant.getMinOptimumTemp();
+        double maxTemp = plant.getMaxOptimumTemp();
+        double minWater = plant.getMinWater();
+        double maxWater = plant.getMaxWater();
         waterBenodigdheid = (minWater + maxWater) / 2;
         if (temperatuur < minTemp) {
             waterBenodigdheid = minWater;
@@ -47,31 +48,27 @@ public class SproeiAlgorithme {
         return waterBenodigdheid;
     }
 
-    public static void Algorithme() {
-        weatherAPI weatherAPI = new weatherAPI();
-        weatherAPI.weerUpdate();
-        Database database = new Database();
-        database.getConnection();
-        database.setPlantData(1);
-        SproeiAlgorithme sproeiAlgorithme = new SproeiAlgorithme(weatherAPI, database);
+    public static double Algorithme(weatherAPI weatherAPI, Database database, Plant plant) {
+        SproeiAlgorithme sproeiAlgorithme = new SproeiAlgorithme(weatherAPI, database, plant);
         double waterBenodigdheid = sproeiAlgorithme.waterBenodigdheid() * 10.23;
-        System.out.println(waterBenodigdheid + "bodemvochtigheid");
+        System.out.println(waterBenodigdheid + " bodemvochtigheid");
+        return waterBenodigdheid; // Return the calculated value
     }
 
-    public static void main(String[] args) {
-        //GEBRUIK DEZE VOOR DE PROJECT
-        SproeiAlgorithme.Algorithme();
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        calendar.add(Calendar.HOUR_OF_DAY, 1);
-        long initialDelay = calendar.getTimeInMillis() - System.currentTimeMillis();
-        long period = 60 * 30 * 1000;
-        scheduler.scheduleAtFixedRate(SproeiAlgorithme::Algorithme, initialDelay, period, TimeUnit.MILLISECONDS);
-    }
+//    public static void main(String[] args) {
+//        //GEBRUIK DEZE VOOR DE PROJECT
+//        SproeiAlgorithme.Algorithme();
+//        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+//
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.MINUTE, 0);
+//        calendar.set(Calendar.SECOND, 0);
+//        calendar.set(Calendar.MILLISECOND, 0);
+//        calendar.add(Calendar.HOUR_OF_DAY, 1);
+//        long initialDelay = calendar.getTimeInMillis() - System.currentTimeMillis();
+//        long period = 60 * 30 * 1000;
+//        scheduler.scheduleAtFixedRate(SproeiAlgorithme::Algorithme, initialDelay, period, TimeUnit.MILLISECONDS);
+//    }
 }
 
 

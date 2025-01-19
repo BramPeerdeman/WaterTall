@@ -32,7 +32,7 @@ public class Main extends Application {
             primaryStage.setY(event.getScreenY() - y);
         });
 
-        // Stel de scène in met de afmetingen default: 700x400
+        // Stel de scène in met de afmetingen 700x400
         primaryStage.setScene(new Scene(root, 1000, 700));
         primaryStage.show();
     }
