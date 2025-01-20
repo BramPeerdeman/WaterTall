@@ -1,32 +1,38 @@
 package com.example.watertall;
 
 import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import java.io.IOException;
-
 import javafx.scene.Node;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.scene.Scene;
 import javafx.application.Platform;
-import javafx.scene.control.Alert;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
+import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-public class Controller implements Initializable
-{
+public class Controller implements Initializable {
 
     @FXML
     private ImageView Exit;
@@ -40,11 +46,11 @@ public class Controller implements Initializable
     @FXML
     private AnchorPane slider;
 
-//    @FXML
-//    private Label locationLabel;
-
     @FXML
     private Label temperatureLabel;
+
+    @FXML
+    private Label dateLabel;
 
     @FXML
     private ImageView weatherIcon;
@@ -52,19 +58,29 @@ public class Controller implements Initializable
     @FXML
     private Label moistureLabel;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    @FXML
+    private BarChart<String, Number> precipitationChart;
 
-        Exit.setOnMouseClicked(event ->
-        {
+    @FXML
+    private CategoryAxis xAxis;
+
+    @FXML
+    private NumberAxis yAxis;
+
+    private weatherAPI weatherApi;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        // Exit button functionality
+        Exit.setOnMouseClicked(event -> {
             System.exit(0);
         });
 
+        // Slider menu functionality
         slider.setTranslateX(-176);
 
-        Menu.setOnMouseClicked(event ->
-        {
+        Menu.setOnMouseClicked(event -> {
             TranslateTransition slide = new TranslateTransition();
             slide.setDuration(Duration.seconds(0.4));
             slide.setNode(slider);
@@ -74,15 +90,13 @@ public class Controller implements Initializable
 
             slider.setTranslateX(-176);
 
-            slide.setOnFinished((ActionEvent e)->
-            {
+            slide.setOnFinished((ActionEvent e) -> {
                 Menu.setVisible(false);
                 MenuClose.setVisible(true);
             });
         });
 
-        MenuClose.setOnMouseClicked(event ->
-        {
+        MenuClose.setOnMouseClicked(event -> {
             TranslateTransition slide = new TranslateTransition();
             slide.setDuration(Duration.seconds(0.4));
             slide.setNode(slider);
@@ -92,28 +106,100 @@ public class Controller implements Initializable
 
             slider.setTranslateX(0);
 
-            slide.setOnFinished((ActionEvent e)->
-            {
+            slide.setOnFinished((ActionEvent e) -> {
                 Menu.setVisible(true);
                 MenuClose.setVisible(false);
             });
         });
 
+        // Initialize weatherAPI and update weather data
+        weatherApi = new weatherAPI();
+        updateWeatherData();
 
+        // Schedule periodic updates every hour
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(this::updateWeatherData, 0, 1, TimeUnit.HOURS);
     }
 
-    public void homeRedirect(ActionEvent event) throws IOException
-    {
-            Parent registerPage = FXMLLoader.load(getClass().getResource("homepage.fxml"));
+    private void updateWeatherData() {
+        // Run in a separate thread to avoid blocking the UI
+        new Thread(() -> {
+            // Fetch weather data from the API
+            weatherApi.weerUpdate();
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            // Get temperature, humidity and precipitation data
+            Temperature temperature = weatherApi.getTemperature();  // Haal de temperatuur op
+            Humidity humidity = weatherApi.getHumidity();
+            Precipitation precipitation = weatherApi.getPrecipitation();
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatterDay = DateTimeFormatter.ofPattern("E, MMM dd yyyy");
+            String formattedDate = now.format(formatterDay);
 
-            stage.setScene(new Scene(registerPage, 700, 400));
-            stage.show();
+            // Get precipitation data from the API
+            JSONArray precipitationArray = weatherApi.getPrecipitationArray();
+            JSONArray dayArray = weatherApi.getDayArray();
+
+            Platform.runLater(() -> {
+                // Update the labels on the UI
+                dateLabel.setText(formattedDate);
+
+                // Update the temperature label
+                if (temperature != null) {
+                    temperatureLabel.setText(temperature.getTemperature() + "°C");
+                } else {
+                    temperatureLabel.setText("Geen temperatuur data");
+                }
+
+                // Display the air humidity and ground moisture (precipitation)
+                if (humidity != null && precipitation != null) {
+                    String moistureText = "Luchtvochtigheid: " + humidity.getHumidity() + "%, Grondvochtigheid: "
+                            + precipitation.getPrecipitation() + "mm";
+                    moistureLabel.setText(moistureText);
+                } else {
+                    moistureLabel.setText("Geen data beschikbaar");
+                }
+
+                // Handle precipitation chart if necessary
+                if (precipitationArray != null && dayArray != null) {
+                    xAxis.setLabel("Datum");
+                    yAxis.setLabel("Neerslag (mm)");
+
+                    precipitationChart.getData().clear();
+
+                    XYChart.Series<String, Number> precipitationSeries = new XYChart.Series<>();
+                    precipitationSeries.setName("Neerslag");
+
+                    for (int i = 0; i < precipitationArray.length(); i++) {
+                        String date = dayArray.getString(i);
+                        double precipitationValue = precipitationArray.getDouble(i);
+                        precipitationSeries.getData().add(new XYChart.Data<>(date, precipitationValue));
+                    }
+
+                    precipitationChart.getData().add(precipitationSeries);
+
+                    ObservableList<String> categories = FXCollections.observableArrayList();
+                    for (int i = 0; i < dayArray.length(); i++) {
+                        categories.add(dayArray.getString(i));
+                    }
+                    xAxis.setCategories(categories);
+                    xAxis.setTickLabelRotation(45);
+                }
+            });
+        }).start();
     }
 
-    public void profielRedirect(ActionEvent event) throws IOException
-    {
+
+
+    public void homeRedirect(ActionEvent event) throws IOException {
+        Parent registerPage = FXMLLoader.load(getClass().getResource("homepage.fxml"));
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        stage.setScene(new Scene(registerPage, 700, 400));
+        stage.show();
+    }
+
+    public void profielRedirect(ActionEvent event) throws IOException {
         Parent registerPage = FXMLLoader.load(getClass().getResource("profiel.fxml"));
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -122,8 +208,7 @@ public class Controller implements Initializable
         stage.show();
     }
 
-    public void settingRedirect(ActionEvent event) throws IOException
-    {
+    public void settingRedirect(ActionEvent event) throws IOException {
         Parent registerPage = FXMLLoader.load(getClass().getResource("homepage.fxml"));
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -144,7 +229,6 @@ public class Controller implements Initializable
         }
     }
 
-    // Methode om de registratie pagina te openen
     public void handleRegisterClick(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("registreren.fxml"));
