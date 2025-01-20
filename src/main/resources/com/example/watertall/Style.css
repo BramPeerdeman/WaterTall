@@ -10,3 +10,9 @@
     -fx-border-color: WHITE;
     -fx-border-width: 0px 0px 0px 3px;
 }
+
+.border {
+    -fx-border-radius: 20px;
+    -fx-border-width: 5px;
+    -fx-border-color: black;
+}
