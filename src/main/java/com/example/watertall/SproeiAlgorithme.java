@@ -44,7 +44,7 @@ public class SproeiAlgorithme {
         if (luchtVochtigheid > 87) {
             waterBenodigdheid = waterBenodigdheid - ((waterBenodigdheid - minWater) * 0.9);
         }
-        return waterBenodigdheid;
+        return waterBenodigdheid - weatherAPI.getPrecipitation().getPrecipitation();
     }
 
     public static void Algorithme() {
@@ -52,7 +52,7 @@ public class SproeiAlgorithme {
         weatherAPI.weerUpdate();
         Database database = new Database();
         database.getConnection();
-        database.setPlantData(1);
+        database.setPlantData(11);
         SproeiAlgorithme sproeiAlgorithme = new SproeiAlgorithme(weatherAPI, database);
         double waterBenodigdheid = sproeiAlgorithme.waterBenodigdheid() * 10.23;
         System.out.println(waterBenodigdheid + "bodemvochtigheid");
