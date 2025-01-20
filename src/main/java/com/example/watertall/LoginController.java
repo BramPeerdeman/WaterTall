@@ -56,7 +56,7 @@ public class LoginController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         // Stel de nieuwe Scene in
-        stage.setScene(new Scene(settingsPage, 700, 400));
+        stage.setScene(new Scene(settingsPage, 1000, 700));
         stage.show();
     }
 
@@ -70,7 +70,7 @@ public class LoginController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
             // Stel de nieuwe Scene in
-            stage.setScene(new Scene(registerPage, 700, 400));
+            stage.setScene(new Scene(registerPage, 1000, 700));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

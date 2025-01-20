@@ -3,6 +3,7 @@ package com.example.watertall;
 import java.io.IOException;
 import java.sql.*;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -68,9 +69,14 @@ public class ProfielenController
     @FXML
     private Label minMoistLabel;
 
+    private SerialController serialController;
+
     @FXML
     public void initialize() {
         loadPlantTypes();
+
+        serialController = new SerialController("COM6", 115200);
+        serialController.start();
 
         plantNameComboBox.setOnAction(event -> {
             String selectedPlantName = plantNameComboBox.getValue();
@@ -122,6 +128,81 @@ public class ProfielenController
         });
     }
 
+    @FXML
+    private void handleSaveProfile(ActionEvent event) {
+        try {
+            String selectedPlantName = plantNameComboBox.getValue();
+
+            if (selectedPlantName != null) {
+                Integer plantId = getPlantIdByName(selectedPlantName);
+
+                if (plantId != null) {
+                    database.setPlantData(plantId);
+                    Plant selectedPlant = database.getPlant();
+
+                    if (selectedPlant == null) {
+                        System.err.println("Selected plant is null. Check database query.");
+                        return;
+                    }
+
+                    weatherAPI weatherAPI = new weatherAPI();
+                    weatherAPI.weerUpdate();
+
+                    // Debug weather data
+                    System.out.println("Weather API Temperature: " + weatherAPI.getTemperature().getTemperature());
+                    System.out.println("Weather API Humidity: " + weatherAPI.getHumidity().getHumidity());
+
+                    // Calculate bodemvochtigheid
+                    double bodemvochtigheid = SproeiAlgorithme.Algorithme(weatherAPI, database, selectedPlant);
+
+                    // Check bodemvochtigheid value
+                    if (Double.isNaN(bodemvochtigheid) || Double.isInfinite(bodemvochtigheid)) {
+                        System.err.println("Invalid bodemvochtigheid value: " + bodemvochtigheid);
+                        return;
+                    }
+
+                    System.out.println("Bodemvochtigheid: " + bodemvochtigheid);
+
+                    // Send the value to the micro:bit
+                    if (serialController != null) {
+                        System.out.println("Test: " + bodemvochtigheid);
+                        serialController.sendData(String.valueOf(bodemvochtigheid));
+                    } else {
+                        System.err.println("SerialController is not initialized!");
+                    }
+                } else {
+                    System.err.println("Plant ID not found!");
+                }
+            } else {
+                System.err.println("No plant selected!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // Log unexpected errors
+        }
+    }
+
+
+
+
+
+    private Integer getPlantIdByName(String plantName) {
+        String query = "SELECT plant_id FROM watertall.profiel_plant WHERE naam_plant = ?";
+        try (Connection connection = database.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, plantName);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt("plant_id");  // Return the plant_id
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;  // Return null if no plant_id is found
+    }
+
     private void loadPlantDetails(String plantName) {
         String query = "SELECT naam_plant, planttype, min_water, max_water, min_optimumtemperatuur, max_optimumtemperatuur, max_speed, min_moisture " +
                 "FROM watertall.profiel_plant WHERE naam_plant = ?";
@@ -142,6 +223,8 @@ public class ProfielenController
                     Integer maxSpeed = resultSet.getInt("max_speed");
                     Integer minMoisture = resultSet.getInt("min_moisture");
 
+                    System.out.println("Plant Name: " + naamPlant);
+
                     // Update the labels with the fetched data
                     naamPlantLabel.setText(naamPlant);
                     planttypeLabel.setText(plantType);
@@ -159,29 +242,31 @@ public class ProfielenController
         }
     }
 
-    public void switchToHome(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("home.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToScene(ActionEvent event, String fxmlFile) {
+        try {
+            root = FXMLLoader.load(getClass().getResource(fxmlFile));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Optionally, display an error message to the user
+        }
     }
 
-    public void switchToInstellingen(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("instellingen.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToHome(ActionEvent event) {
+        switchToScene(event, "homepage.fxml");
     }
 
-    public void switchToProfielen(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("profielen2.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToInstellingen(ActionEvent event) {
+        switchToScene(event, "instellingen.fxml");
     }
+
+    public void switchToProfielen(ActionEvent event) {
+        switchToScene(event, "profiel.fxml");
+    }
+
 
     // Method to load plant types into ComboBox
     @FXML

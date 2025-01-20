@@ -77,7 +77,6 @@ public class Controller implements Initializable {
             System.exit(0);
         });
 
-        // Slider menu functionality
         slider.setTranslateX(-176);
 
         Menu.setOnMouseClicked(event -> {
@@ -195,8 +194,8 @@ public class Controller implements Initializable {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        stage.setScene(new Scene(registerPage, 700, 400));
-        stage.show();
+            stage.setScene(new Scene(registerPage, 1000, 700));
+            stage.show();
     }
 
     public void profielRedirect(ActionEvent event) throws IOException {
@@ -204,7 +203,7 @@ public class Controller implements Initializable {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        stage.setScene(new Scene(registerPage, 700, 400));
+        stage.setScene(new Scene(registerPage, 1000, 700));
         stage.show();
     }
 
@@ -213,7 +212,7 @@ public class Controller implements Initializable {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        stage.setScene(new Scene(registerPage, 700, 400));
+        stage.setScene(new Scene(registerPage, 1000, 700));
         stage.show();
     }
 

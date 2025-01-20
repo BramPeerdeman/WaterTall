@@ -30,24 +30,35 @@ public class Database
         return databaseLink;
     }
 
-    public void setPlantData (Integer id) {
-        String query = "SELECT naam_plant, planttype, min_water, max_water, min_optimumtemperatuur, max_optimumtemperatuur FROM profiel_plant WHERE plant_id = ?";
-        try (PreparedStatement stmt = databaseLink.prepareStatement(query)) {
-            stmt.setInt(1, id);
-            ResultSet plantRs = stmt.executeQuery();
-            if (plantRs.next()) {
-                this.plant = new Plant(id,
-                        plantRs.getString("naam_plant"),
-                        plantRs.getString("planttype"),
-                        plantRs.getDouble("min_water"), //water is in bodemvochtigheids%
-                        plantRs.getDouble("max_water"),
-                        plantRs.getDouble("min_optimumtemperatuur"), // in celcius
-                        plantRs.getDouble("max_optimumtemperatuur"));
+    public void setPlantData(Integer plantId) {
+        String query = "SELECT naam_plant, planttype, min_water, max_water, min_optimumtemperatuur, max_optimumtemperatuur " +
+                "FROM watertall.profiel_plant WHERE plant_id = ?";
+        try (Connection connection = getConnection(); // Ensure you're getting a new connection here
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setInt(1, plantId);  // Use plant_id to fetch plant data
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    this.plant = new Plant(
+                            plantId,
+                            resultSet.getString("naam_plant"),
+                            resultSet.getString("planttype"),
+                            resultSet.getDouble("min_water"),
+                            resultSet.getDouble("max_water"),
+                            resultSet.getDouble("min_optimumtemperatuur"),
+                            resultSet.getDouble("max_optimumtemperatuur")
+                    );
+                } else {
+                    System.out.println("No plant found for ID: " + plantId);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+
 
     public Plant getPlant() {
         return plant;

@@ -4,18 +4,16 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watertall.ProfielenController">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watertall.ProfielenController">
     <children>
         <BorderPane layoutX="68.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
@@ -103,23 +101,10 @@
                     </children>
                 </AnchorPane>
             </left>
-            <center>
-
-                <GridPane alignment="CENTER" hgap="20.0" vgap="20.0" BorderPane.alignment="CENTER">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="ALWAYS" />
-                        <ColumnConstraints hgrow="ALWAYS" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints vgrow="ALWAYS" />
-                        <RowConstraints vgrow="ALWAYS" />
-                    </rowConstraints>
-                </GridPane>
-            </center>
          <right>
-                <AnchorPane prefHeight="335.0" prefWidth="170.0" BorderPane.alignment="CENTER">
+                <AnchorPane prefHeight="635.0" prefWidth="849.0" BorderPane.alignment="CENTER">
                     <children>
-                        <AnchorPane prefHeight="335.0" prefWidth="197.0">
+                        <AnchorPane layoutX="140.0" layoutY="49.0" prefHeight="335.0" prefWidth="197.0">
                             <children>
                                 <VBox prefHeight="43.0" prefWidth="524.0">
                                     <children>
@@ -144,6 +129,14 @@
                                                 <Insets left="50.0" top="10.0" />
                                             </VBox.margin>
                                         </ComboBox>
+                              <JFXButton fx:id="saveProfile" alignment="CENTER" buttonType="RAISED" onAction="#handleSaveProfile" prefWidth="150.0" ripplerFill="BLACK" style="-fx-background-color: #808000;" text="Opslaan" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets left="50.0" top="10.0" />
+                                 </VBox.margin>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </JFXButton>
                                     </children></VBox>
                                 <VBox layoutX="263.0" layoutY="43.0" prefHeight="292.0" prefWidth="305.0">
                                     <children>

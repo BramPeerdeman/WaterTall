@@ -1,5 +1,4 @@
 module com.example.watertall {
-    requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
 
@@ -17,6 +16,7 @@ module com.example.watertall {
     requires org.json;
     requires jbcrypt;
     requires com.fazecast.jSerialComm;
+    requires com.jfoenix;
 
     opens com.example.watertall to javafx.fxml;
     exports com.example.watertall;
