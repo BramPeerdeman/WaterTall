@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watertall.ProfielenController">
+    <children>
+        <BorderPane layoutX="68.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <AnchorPane prefHeight="65.0" prefWidth="200.0" style="-fx-background-color: #808000;" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox layoutX="150.0" layoutY="10.0" spacing="15.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                            <children>
+                                <ImageView fx:id="Exit" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../images/exit.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                        <Label fx:id="Menu" layoutX="14.0" layoutY="34.0" text="MENU" textFill="WHITE">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../images/menu.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="MenuClose" layoutX="14.0" layoutY="34.0" text="MENU" textFill="WHITE">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../images/menu.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </top>
+            <left>
+                <AnchorPane fx:id="slider" prefWidth="150.0" style="-fx-background-color: #808000;" BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox layoutX="111.0" layoutY="95.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
+                            <children>
+                                <JFXButton alignment="BASELINE_LEFT" onAction="#switchToHome" prefHeight="50.0" prefWidth="335.0" styleClass="sidebarItem" text="Home" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                    <graphic>
+                                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../images/dash.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </JFXButton>
+                                <JFXButton alignment="BASELINE_LEFT" onAction="#switchToProfielen" prefHeight="50.0" prefWidth="149.0" styleClass="sidebarItem" text="Profiles" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                    <graphic>
+                                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../images/add.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </JFXButton>
+                                <JFXButton alignment="BASELINE_LEFT" onAction="#switchToInstellingen" prefHeight="50.0" prefWidth="335.0" styleClass="sidebarItem" text="Settings" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                    <graphic>
+                                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../images/data.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </JFXButton>
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </left>
+         <right>
+                <AnchorPane prefHeight="635.0" prefWidth="849.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <AnchorPane layoutX="140.0" layoutY="49.0" prefHeight="335.0" prefWidth="197.0">
+                            <children>
+                                <VBox prefHeight="43.0" prefWidth="524.0">
+                                    <children>
+                                        <Label prefHeight="27.0" prefWidth="102.0" text="     Profielen" textAlignment="CENTER">
+                                            <font>
+                                                <Font size="18.0" />
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets left="190.0" top="10.0" />
+                                            </VBox.margin>
+                                        </Label>
+                                    </children></VBox>
+                                <VBox layoutY="43.0" prefHeight="292.0" prefWidth="253.0">
+                                    <children>
+                                        <ComboBox fx:id="plantTypeComboBox" onAction="#loadPlantTypes" prefWidth="150.0" promptText="Planttypen ">
+                                            <VBox.margin>
+                                                <Insets left="50.0" top="10.0" />
+                                            </VBox.margin>
+                                        </ComboBox>
+                                        <ComboBox fx:id="plantNameComboBox" layoutX="20.0" layoutY="20.0" prefWidth="150.0" promptText="Plantennaam">
+                                            <VBox.margin>
+                                                <Insets left="50.0" top="10.0" />
+                                            </VBox.margin>
+                                        </ComboBox>
+                              <JFXButton fx:id="saveProfile" alignment="CENTER" buttonType="RAISED" onAction="#handleSaveProfile" prefWidth="150.0" ripplerFill="BLACK" style="-fx-background-color: #808000;" text="Opslaan" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets left="50.0" top="10.0" />
+                                 </VBox.margin>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </JFXButton>
+                                    </children></VBox>
+                                <VBox layoutX="263.0" layoutY="43.0" prefHeight="292.0" prefWidth="305.0">
+                                    <children>
+                                        <Label text="Naam Plant:" />
+                                        <Label fx:id="naamPlantLabel" text="-" />
+                                        <Label text="Planttype:" />
+                                        <Label fx:id="planttypeLabel" text="-" />
+                                        <Label text="Min Water:" />
+                                        <Label fx:id="minWaterLabel" text="-" />
+                                        <Label text="Max Water:" />
+                                        <Label fx:id="maxWaterLabel" text="-" />
+                                        <Label text="Min Temperatuur:" />
+                                        <Label fx:id="minTempLabel" text="-" />
+                                        <Label text="Max Temperatuur:" />
+                                        <Label fx:id="maxTempLabel" text="-" />
+
+                                        <Label text="Pomp Snelheid:" />
+                                        <Label fx:id="maxSpeedLabel" text="-" />
+
+                                        <Label text="Vochtigheid waarde:" />
+                                        <Label fx:id="minMoistLabel" text="-" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </AnchorPane>
+         </right>
+        </BorderPane>
+    </children>
+</AnchorPane>
