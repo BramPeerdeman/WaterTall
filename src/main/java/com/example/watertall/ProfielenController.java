@@ -72,6 +72,9 @@ public class ProfielenController
     private SerialController serialController;
 
     @FXML
+    private ComboBox<String> taal;
+
+    @FXML
     public void initialize() {
         loadPlantTypes();
 
