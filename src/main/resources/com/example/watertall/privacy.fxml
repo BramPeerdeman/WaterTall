@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watertall.infoController">
+    <children>
+        <BorderPane layoutX="68.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <AnchorPane prefHeight="65.0" prefWidth="200.0" style="-fx-background-color: #808000;" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox layoutX="150.0" layoutY="10.0" spacing="15.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                            <children>
+                                <ImageView fx:id="Exit" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../images/exit.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                        <Label fx:id="Menu" layoutX="14.0" layoutY="34.0" text="MENU" textFill="WHITE">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../images/menu.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="MenuClose" layoutX="14.0" layoutY="34.0" text="MENU" textFill="WHITE">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../images/menu.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </top>
+            <left>
+                <AnchorPane fx:id="slider" prefWidth="150.0" style="-fx-background-color: #808000;" BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox layoutX="111.0" layoutY="95.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
+                            <children>
+                                <JFXButton alignment="BASELINE_LEFT" onAction="#switchToHome" prefHeight="50.0" prefWidth="335.0" styleClass="sidebarItem" text="Home" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                    <graphic>
+                                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../images/dash.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </JFXButton>
+                                <JFXButton alignment="BASELINE_LEFT" onAction="#switchToProfielen" prefHeight="50.0" prefWidth="335.0" styleClass="sidebarItem" text="Profiles" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                    <graphic>
+                                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../images/add.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </JFXButton>
+                                <JFXButton alignment="BASELINE_LEFT" onAction="#switchToInstellingen" prefHeight="50.0" prefWidth="335.0" styleClass="sidebarItem" text="Settings" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                    <graphic>
+                                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../images/data.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </JFXButton>
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </left>
+            <center>
+                <AnchorPane prefHeight="335.0" prefWidth="170.0" BorderPane.alignment="CENTER">
+                    <children>
+                          <VBox layoutX="146.0" layoutY="14.0" prefHeight="43.0" prefWidth="450.0">
+                              <children>
+                                  <Label prefHeight="46.0" prefWidth="524.0" text="                                          Privacybeleid" textAlignment="CENTER">
+                                      <font>
+                                          <Font size="18.0" />
+                                      </font>
+                        </Label>
+                              </children>
+                  </VBox>
+                          <VBox layoutX="-1.0" layoutY="64.0" prefHeight="572.0" prefWidth="851.0">
+                              <children>
+                                  <TextArea editable="false" prefHeight="576.0" prefWidth="851.0" text="Privacybeleid voor ons Irrigatiesysteem&#10;&#10;Dit privacybeleid legt uit hoe wij omgaan met uw persoonlijke gegevens wanneer u gebruikmaakt van ons irrigatiesysteem, inclusief de functionaliteit om uzelf aan te melden en de integratie met een weer-API. Wij nemen uw privacy serieus en streven ernaar uw gegevens te beschermen.&#10;&#10;1. Welke gegevens verzamelen wij?&#10;Wij verzamelen de volgende gegevens om het systeem optimaal te laten functioneren:&#10;&#10;- Persoonlijke gegevens: Naam, e-mailadres, en wachtwoord (gehashed en beveiligd).&#10;- Gebruikersinstellingen: Zoals sproei-instellingen, voorkeuren en tuinlocaties.&#10;- Locatiegegevens: Voor nauwkeurige weersinformatie via de weer-API.&#10;- Technische gegevens: IP-adres, apparaattype en gebruiksstatistieken voor probleemoplossing en verbeteringen.&#10;&#10;2. Hoe gebruiken wij deze gegevens?&#10;De verzamelde gegevens worden gebruikt om:&#10;&#10;- Uw account en irrigatievoorkeuren te beheren.&#10;- Real-time weersinformatie op uw locatie te bieden.&#10;- Automatische sproeischema's aan te passen op basis van de weersvoorspellingen.&#10;- Onze diensten te verbeteren en te personaliseren.&#10;&#10;3. Delen wij uw gegevens met derden?&#10;Uw gegevens worden alleen gedeeld met:&#10;&#10;- De weer-API-provider: Voor het ophalen van actuele weersinformatie. We delen alleen uw locatie (of een algemene regio, afhankelijk van uw instellingen).&#10;- Dienstverleners: Voor hosting, beveiliging en analytische doeleinden. Deze partijen zijn verplicht uw gegevens te beschermen.&#10;  Wij verkopen of verhuren uw gegevens nooit aan derden.&#10;&#10;4. Hoe beveiligen wij uw gegevens?&#10;Wij nemen beveiligingsmaatregelen om uw gegevens te beschermen, waaronder:&#10;&#10;- Versleuteling van gegevens tijdens overdracht (SSL/TLS).&#10;- Gehashte opslag van wachtwoorden.&#10;- Regelmatige beveiligingsaudits van ons systeem.&#10;&#10;5. Hoe lang bewaren wij uw gegevens?&#10;Uw gegevens worden bewaard zolang uw account actief is of zolang als nodig is om onze diensten te leveren. U kunt op elk moment verzoeken om verwijdering van uw gegevens.&#10;&#10;6. Uw rechten&#10;U heeft de volgende rechten met betrekking tot uw persoonlijke gegevens:&#10;&#10;- Inzage: U kunt een kopie van uw gegevens opvragen.&#10;- Correctie: U kunt onjuiste gegevens laten corrigeren.&#10;- Verwijdering: U kunt verzoeken om het verwijderen van uw gegevens.&#10;- Bezwaar: U kunt bezwaar maken tegen het gebruik van uw gegevens voor bepaalde doeleinden.&#10;  Neem contact met ons op via Watertall@business.com om een van deze rechten uit te oefenen.&#10;&#10;7. Cookies&#10;Wij gebruiken cookies om de functionaliteit van onze diensten te verbeteren. Cookies worden onder andere gebruikt om:&#10;&#10;- Uw instellingen en voorkeuren op te slaan.&#10;- Gebruikersgedrag anoniem te analyseren.&#10;&#10;8. Wijzigingen in dit privacybeleid&#10;Wij kunnen dit privacybeleid van tijd tot tijd wijzigen. De meest recente versie zal altijd beschikbaar zijn op onze website. Wij raden u aan dit beleid regelmatig te controleren.&#10;&#10;9. Contact opnemen&#10;Als u vragen heeft over dit privacybeleid of hoe wij met uw gegevens omgaan, neem dan contact met ons op via:&#10;&#10;- E-mailadres: Watertall@business.com&#10;- Postadres: Johanna Westerdijkplein 75, 2521 EP Den Haag&#10;&#10;Laatst bijgewerkt: 17-01-2025&#10;&#10;" wrapText="true" />
+                              </children>
+                          </VBox>
+                          <VBox layoutX="761.0" layoutY="14.0" prefHeight="43.0" prefWidth="74.0">
+                              <children>
+                                  <Button mnemonicParsing="false" onAction="#switchToInstellingen" text="↩">
+                                      <VBox.margin>
+                                          <Insets left="51.0" />
+                                      </VBox.margin>
+                                  </Button>
+                              </children>
+                          </VBox>
+                    </children>
+                </AnchorPane>
+            </center>
+</BorderPane>
+        </children>
+</AnchorPane>

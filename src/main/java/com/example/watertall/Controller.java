@@ -151,7 +151,7 @@ public class Controller implements Initializable {
 
                 // Display the air humidity and ground moisture (precipitation)
                 if (humidity != null && precipitation != null) {
-                    String moistureText = "Luchtvochtigheid: " + humidity.getHumidity() + "%, Grondvochtigheid: "
+                    String moistureText = "Luchtvochtigheid: " + humidity.getHumidity() + "%\nGrondvochtigheid: "
                             + precipitation.getPrecipitation() + "mm";
                     moistureLabel.setText(moistureText);
                 } else {
@@ -208,7 +208,7 @@ public class Controller implements Initializable {
     }
 
     public void settingRedirect(ActionEvent event) throws IOException {
-        Parent registerPage = FXMLLoader.load(getClass().getResource("homepage.fxml"));
+        Parent registerPage = FXMLLoader.load(getClass().getResource("instellingen.fxml"));
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 

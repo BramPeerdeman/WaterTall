@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watertall.infoController">
+    <children>
+        <BorderPane layoutX="68.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <AnchorPane prefHeight="65.0" prefWidth="200.0" style="-fx-background-color: #808000;" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox layoutX="150.0" layoutY="10.0" spacing="15.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                            <children>
+                                <ImageView fx:id="Exit" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../images/exit.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                        <Label fx:id="Menu" layoutX="14.0" layoutY="34.0" text="MENU" textFill="WHITE">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../images/menu.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="MenuClose" layoutX="14.0" layoutY="34.0" text="MENU" textFill="WHITE">
+                            <graphic>
+                                <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../../images/menu.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </top>
+            <left>
+                <AnchorPane fx:id="slider" prefWidth="150.0" style="-fx-background-color: #808000;" BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox layoutX="111.0" layoutY="95.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
+                            <children>
+                                <JFXButton alignment="BASELINE_LEFT" onAction="#switchToHome" prefHeight="50.0" prefWidth="335.0" styleClass="sidebarItem" text="Home" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                    <graphic>
+                                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../images/dash.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </JFXButton>
+                                <JFXButton alignment="BASELINE_LEFT" onAction="#switchToProfielen" prefHeight="50.0" prefWidth="335.0" styleClass="sidebarItem" text="Profiles" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                    <graphic>
+                                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../images/add.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </JFXButton>
+                                <JFXButton alignment="BASELINE_LEFT" onAction="#switchToInstellingen" prefHeight="50.0" prefWidth="335.0" styleClass="sidebarItem" text="Settings" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="15.0" />
+                                    </font>
+                                    <graphic>
+                                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../images/data.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </JFXButton>
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </left>
+         <center>
+              <AnchorPane prefHeight="335.0" prefWidth="170.0" BorderPane.alignment="CENTER">
+                  <children>
+                        <VBox layoutX="156.0" layoutY="7.0" prefHeight="43.0" prefWidth="450.0">
+                            <children>
+                                <Label prefHeight="46.0" prefWidth="524.0" text="                                             Over ons" textAlignment="CENTER">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                        </Label>
+                            </children>
+                  </VBox>
+                        <VBox layoutX="1.0" layoutY="58.0" prefHeight="579.0" prefWidth="848.0">
+                     <children>
+                                <TextArea editable="false" prefHeight="598.0" prefWidth="848.0" text="Bij Watertall geloven we in een duurzame toekomst waarin technologie en natuur hand in hand gaan. Ons slimme irrigatiesysteem is ontworpen om water te besparen, gewassen gezond te houden en een positieve bijdrage te leveren aan het milieu. Of je nu een hobbytuinier bent of een professionele boer, Watertall is jouw betrouwbare partner in duurzaam waterbeheer.&#10;&#10;Onze Missie&#10;Droogte is een groeiend probleem door klimaatverandering. Boeren en tuinders wereldwijd staan voor de uitdaging om efficiënt met water om te gaan en tegelijkertijd gezonde planten en gewassen te behouden. Onze missie is simpel: &#10;- Water verspilling voorkomen&#10;- De landbouw weerbaar maken tegen droogte&#10;- De planeet beschermen voor toekomstige generaties&#10;&#10;Met Watertall zetten we technologie in om deze missie te realiseren. Onze slimme oplossingen combineren geavanceerde sensoren, realtime data en een weer-API om waterbeheer naar een nieuw niveau te tillen.&#10;&#10;Hoe Werkt Watertall?&#10;Watertall is meer dan een irrigatiesysteem – het is een revolutie in waterbeheer. Ons systeem werkt met: &#10;- Geavanceerde sensoren die de vochtigheid van de grond meten&#10;- Realtime data die inzicht geeft in de waterbehoefte van jouw gewassen&#10;- Een weer-API die automatisch sproei-instellingen aanpast op basis van weersvoorspellingen&#10;&#10;Dankzij deze technologie krijgt elke plant precies de juiste hoeveelheid water, op het juiste moment. Het resultaat? Minder verspilling, gezonde planten en lagere waterkosten.&#10;&#10;Waarom Kiezen voor Watertall?&#10;1. Waterbesparing: Door gericht en slim te irrigeren, bespaart Watertall tot wel 50% water vergeleken met traditionele methoden.&#10;2. Betere gewassen: Gezonde en goed onderhouden planten dankzij nauwkeurige vochtregeling.&#10;3. Milieuvriendelijk: Watertall helpt bij het verminderen van de impact van droogte en draagt bij aan de Duurzame Ontwikkelingsdoelen (SDG 13: Klimaatactie).&#10;4. Gebruiksvriendelijk: Met een intuïtieve app en eenvoudige installatie kan iedereen aan de slag.&#10;5. Innovatieve technologie: Watertall maakt gebruik van moderne oplossingen zoals micro:bits en slimme algoritmes om optimale resultaten te leveren.&#10;&#10;Onze Impact&#10;Met Watertall dragen we bij aan een groenere toekomst. Elk systeem dat wordt geïnstalleerd helpt om:&#10;- Watertekorten tegen te gaan&#10;- De landbouwproductiviteit te verhogen&#10;- De ecologische voetafdruk van irrigatie te verkleinen&#10;&#10;Samenwerken aan een Duurzame Planeet&#10;Bij Watertall zien we duurzaamheid niet alleen als een doel, maar als een verantwoordelijkheid. Door samen te werken met boeren, tuinders en milieuorganisaties, willen we de manier waarop water in de landbouw wordt gebruikt voorgoed veranderen.&#10;&#10;Ontdek hoe jij deel kunt uitmaken van deze verandering. Kies voor Watertall en maak een verschil – voor jouw gewassen, jouw portemonnee en de wereld om ons heen.&#10;&#10;Watertall – Slim water geven, zorgeloos groeien.&#10;&#10;&#10;&#10;" wrapText="true" />
+                     </children>
+                        </VBox>
+                        <VBox layoutX="736.0" layoutY="14.0" prefHeight="44.0" prefWidth="100.0">
+                            <children>
+                                <Button mnemonicParsing="false" onAction="#switchToInstellingen" text="↩">
+                                    <VBox.margin>
+                                        <Insets left="76.0" />
+                                    </VBox.margin>
+                                </Button>
+                            </children>
+                        </VBox>
+                  </children>
+              </AnchorPane>
+         </center>
+        </BorderPane>
+    </children>
+</AnchorPane>
