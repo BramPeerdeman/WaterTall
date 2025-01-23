@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -34,11 +35,30 @@ public class infoController {
 
     @FXML
     private AnchorPane slider;
+    @FXML
+    private ToggleButton updateToggleButton;
 
+    @FXML
+    private Label statusLabel;
+
+    @FXML
+    private Label statusLabel2;
 
     @FXML
     public void initialize() {
-
+        if (updateToggleButton != null) {
+            updateToggleButton.setOnAction(event -> {
+                if (updateToggleButton.isSelected()) {
+                    updateToggleButton.setText("Uit");
+                    statusLabel.setText("Uw systeem is up-to-date");
+                    statusLabel2.setText("Er zijn geen updates beschikbaar");
+                } else {
+                    updateToggleButton.setText("Aan");
+                    statusLabel.setText("Uw systeem is up-to-date");
+                    statusLabel2.setText("");
+                }
+            });
+        }
 
         Exit.setOnMouseClicked(event ->
         {
